@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,6 +10,15 @@ Route::get('/', function () {
 });
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+
+Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+
+Route::get('/bookings/create/{room}', [BookingController::class, 'create'])->name('bookings.create');
+
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
+Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+
 
 Route::get('/dashboard', function () {
     return redirect()->route('rooms.index');
