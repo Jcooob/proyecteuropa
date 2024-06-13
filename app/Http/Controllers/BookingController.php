@@ -59,16 +59,20 @@ class BookingController extends Controller
             'total_price' => $validatedData['total_price'],
             'payment_method' => $validatedData['payment_method'],
         ]);
+
+        $room = Room::find($validatedData['room_id']);
+        $room->state = 'unavailable';
+        $room->save();
     
-        return redirect()->route('dashboard')->with('success', 'Reserva realizada con éxito.');
-    }  
+        return redirect()->route('bookings.index')->with('success', 'Reserva realizada con éxito.');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(Booking $booking)
     {
-        //
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -76,22 +80,45 @@ class BookingController extends Controller
      */
     public function edit(Booking $booking)
     {
-        //
+        return view('bookings.edit', compact('booking'));
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Booking $booking)
     {
-        //
+        // Validar los datos de entrada
+        $validatedData = $request->validate([
+            'number_of_guests' => 'required|integer|min:1',
+            'starting_date' => 'required|date',
+            'ending_date' => 'required|date|after:starting_date',
+            'total_price' => 'required|numeric|min:0',
+            'payment_method' => 'required|string'
+        ]);
+    
+        // Actualizar la reserva
+        $booking->update($validatedData);
+    
+        return redirect()->route('bookings.index')->with('success', 'Reserva actualizada con éxito.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Booking $booking)
     {
-        //
+        $room = $booking->room;
+        $room->state = 'available';
+        $room->save();
+    
+        // Eliminar la reserva
+        $booking->delete();
+    
+        return redirect()->route('bookings.index')->with('success', 'Reserva eliminada con éxito.');
     }
+    
+    
 }

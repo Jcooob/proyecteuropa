@@ -30,8 +30,8 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($bookings as $booking)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $booking->room->category }}</td>
+                                    <tr class="cursor-pointer hover:bg-gray-100" onclick="window.location='{{ route('bookings.show', $booking->id) }}'">
+                                        <td class="px-6 py-4 whitespace-nowrap">{{ ucfirst(strtolower($booking->room->category)) }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $booking->room->room_number }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $booking->starting_date }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $booking->ending_date }}</td>
@@ -40,6 +40,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+
                         </table>
                     @endif
                 </div>

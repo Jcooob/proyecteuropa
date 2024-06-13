@@ -45,7 +45,7 @@
                         </span>
                     </p>
                     @if ($room->state === 'available')
-                    <a href="{{ route('bookings.create', $room->id) }}" class="mt-auto bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-md shadow-lg transition duration-300">
+                        <a href="{{ route('bookings.create', $room->id) }}" class="mt-auto bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded-md shadow-lg transition duration-300 block text-center">
                             Generar reserva
                         </a>
                     @else

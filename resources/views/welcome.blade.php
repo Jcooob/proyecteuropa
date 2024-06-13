@@ -58,7 +58,7 @@
                 <main class="container mx-auto flex flex-col items-center justify-center flex-1 px-6">
                     <h1 class="text-5xl text-white font-bold mb-6 text-center">Bienvenido a HotelPHP</h1>
                     <p class="text-xl text-white text-center mb-6">Disfruta de una estancia inolvidable con nosotros</p>
-                    <a href="#book-now" class="bg-black text-white py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300">Reservar Ahora</a>
+                    <a href="{{ url('/dashboard') }}" class="bg-black text-white py-2 px-6 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300">Reservar Ahora</a>
                 </main>
                 <footer class="bg-black text-white py-4">
                     <div class="container mx-auto text-center">

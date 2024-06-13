@@ -19,6 +19,13 @@ Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.st
 
 Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
 
+Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
+
+Route::get('bookings/{booking}/edit', [BookingController::class, 'edit'])->name('bookings.edit');
+
+Route::put('bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
+
+Route::delete('bookings/{booking}', [BookingController::class, 'destroy'])->name('bookings.destroy');
 
 Route::get('/dashboard', function () {
     return redirect()->route('rooms.index');
